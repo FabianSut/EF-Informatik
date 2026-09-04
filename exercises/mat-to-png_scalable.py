@@ -2,7 +2,7 @@ import png # Paket png importieren
 
 def write(temp):
     for i in range(faktor):
-        big_smiley.insert((len(big_smiley)-1),temp)
+        big_smiley.insert((len(big_smiley)),temp)
 
 faktor = 10
 
