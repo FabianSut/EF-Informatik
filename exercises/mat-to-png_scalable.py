@@ -2,7 +2,7 @@ import png # Paket png importieren
 
 def write(temp):
     for i in range(faktor):
-        big_smiley.append(temp)
+        big_smiley.insert((len(big_smiley)-1),temp)
 
 faktor = 10
 
@@ -20,15 +20,20 @@ big_smiley = []
 
 temp = []
 
+z = 0
+p = 0
+
 for zeile in smiley:
-    z = 1
     for pixel in zeile:
-        p = 1
         for i in range(faktor):
             temp.append(smiley[z][p])
-        write(temp)
         p = p + 1
+    write(temp)
+    temp = []
+    p = 0
     z = z + 1
+z = 0
 
+# print(big_smiley)
 
-png.from_array(smiley, 'L').save('big_smiley.png')
+png.from_array(big_smiley, 'L').save('big_smiley.png')
