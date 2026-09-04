@@ -4,7 +4,7 @@ def write(temp):
     for i in range(faktor):
         big_smiley.append(temp)
 
-faktor = 2
+faktor = 10
 
 smiley = [
     [000, 000, 000, 000, 000, 000],
@@ -21,10 +21,14 @@ big_smiley = []
 temp = []
 
 for zeile in smiley:
+    z = 1
     for pixel in zeile:
+        p = 1
         for i in range(faktor):
-            temp.append(smiley[zeile][pixel])
+            temp.append(smiley[z][p])
         write(temp)
+        p = p + 1
+    z = z + 1
 
 
-png.from_array(smiley, 'L').save('small_smiley.png')
+png.from_array(smiley, 'L').save('big_smiley.png')
