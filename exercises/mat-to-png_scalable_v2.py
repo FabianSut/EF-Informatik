@@ -39,7 +39,22 @@ z = 0
 
 # v2
 
-big_smiley_v2 = []
+matrix = []
+
+n = 0
+
+while len(big_smiley[0]) != len(matrix):
+    if n == 0:
+        matrix.append(0)
+        n = 1
+    elif n == 1:
+        matrix.append(1)
+        n = 0
+
+
+for y in range(len(big_smiley)):
+    for x in range(len(big_smiley[0])):
+        big_smiley[y][x] = big_smiley[y][x] * matrix[x]
 
 
 
