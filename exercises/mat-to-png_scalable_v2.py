@@ -39,37 +39,27 @@ z = 0
 
 # v2
 
-matrix1 = []
-matrix2 = []
+matrix = []
+
+tempm = []
 
 n = 0
 
-while len(big_smiley[0]) != len(matrix1):
-    if n == 0:
-        matrix1.append(0)
-        n = 1
-    elif n == 1:
-        matrix1.append(1)
-        n = 0
+for y in range(len(big_smiley)):
+    tempm = []
+    for x in range(len(big_smiley[y])):
+        n = 1 - n
+        tempm.append(n)
+    matrix.append(tempm)
 
-n = 1
+    if y % 2 == 0:
+        for i in range(len(matrix[y])):
+            matrix[y][i] = 1 - matrix[y][i]
 
-while len(big_smiley[0]) != len(matrix2):
-    if n == 0:
-        matrix2.append(0)
-        n = 1
-    elif n == 1:
-        matrix2.append(1)
-        n = 0
-
+print(matrix)
 
 for y in range(len(big_smiley)):
-    if y % 2 == 0: 
-        for x in range(len(big_smiley[0])):
-            big_smiley[y][x] = big_smiley[y][x] * matrix1[x]
-    elif y % 2 != 0:
-        for x in range(len(big_smiley[0])):
-            big_smiley[y][x] = big_smiley[y][x] * matrix2[x]
-
+    for x in range(len(big_smiley[y])):
+        big_smiley[y][x] = big_smiley[y][x] * matrix[y][x]
 
 png.from_array(big_smiley, 'L').save('big_smiley_v2.png')
