@@ -39,6 +39,8 @@ z = 0
 
 # v2
 
+big_smiley_v2 = []
+
 matrix = []
 
 tempm = []
@@ -60,6 +62,6 @@ print(matrix)
 
 for y in range(len(big_smiley)):
     for x in range(len(big_smiley[y])):
-        big_smiley[y][x] = big_smiley[y][x] * matrix[y][x]
+        big_smiley_v2[y][x] = big_smiley[y][x] * matrix[y][x]
 
 png.from_array(big_smiley, 'L').save('big_smiley_v2.png')
