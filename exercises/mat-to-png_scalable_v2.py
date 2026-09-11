@@ -4,7 +4,7 @@ def write(temp):
     for i in range(faktor):
         big_smiley.insert((len(big_smiley)),temp)
 
-faktor = 100
+faktor = 1000
 
 smiley = [
     [000, 000, 000, 000, 000, 000],
