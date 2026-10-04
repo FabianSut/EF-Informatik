@@ -1,7 +1,3 @@
-from grid import Grid
-from game import gameloop, sleep
-
-board = Grid(10, 10)
 
 zehn = list(0 for i in range(10))
 
@@ -26,36 +22,10 @@ for p in primzahlen:
             n = y * 10 + x + 1
             if n % p == 0 and hundert[y][x] == 0:
                 hundert[y][x] = p
+                print(p)
     n = 1
-    
-board[0][0] = 'black'
 
-color = ["red", 'blue', "green", "yellow", "orange","skyblue", "gold", "olive", "lime", "forestgreen", "coral", "seagreen", "turquoise", "royalblue", "navy", "indigo", "violet", "silver", "magenta", "hotpink", "plum", "tan", "beige", "chocolate", "rebeccapurple"]
 
-y = 0
-x = 0
-n = 0
+print(len(primzahlen))
 
-@gameloop
-def update():
-    global y, x, p, n
-    
-    p = primzahlen[n]
-    
-    if hundert[y][x] == p:
-        board[y][x] = color[primzahlen.index(p)]
-        sleep(0)
-            
-    x = x + 1
-    
-    if x == 10:
-        x = 0
-        y = y + 1
-        
-    if y == 10:
-        x = 0
-        y = 0
-        n = n + 1
-    
-
-update()
+print(hundert)
