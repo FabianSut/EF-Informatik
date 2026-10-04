@@ -9,7 +9,7 @@ p = 2
 
 hundert_prim = list(range(2, 101))
 
-primzahlen = list(range(2, 51))
+primzahlen = list(range(2, 101))
 
 for n in hundert_prim:
     for m in primzahlen:
@@ -24,5 +24,8 @@ for p in primzahlen:
                 hundert[y][x] = p
                 print(p)
     n = 1
+
+
+print(len(primzahlen))
 
 print(hundert)
