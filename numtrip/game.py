@@ -8,7 +8,7 @@ feld = [
     [4, 16, 16, 8, 4]
 ]
 
-farben = ['1 gibt es nicht', '\033[42m', '\033[105m', '\033[41m', '\033[45m', '\033[46m']
+farben = ['1 gibt es nicht', '\033[30;42m', '\033[30;105m', '\033[30;101m', '\033[30;45m', '\033[30;46m']
 
 def farbe(n):
     exponent = int(math.log(n) / math.log(2))
