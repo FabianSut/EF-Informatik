@@ -15,21 +15,19 @@ def farbe(n):
     farbe = farben[exponent]
     return farbe
 
+def zahl(n):
+    if len(str(n)) < 3:
+        return str(n).rjust(2, ' ') + ' '
+    else:
+        return str(n)
+
 def ausgeben(feld):
     print('     1   2   3   4   5')
     for y in range(len(feld)):
         print('    -------------------')
-        print(y + 1, end= '  ')
+        print(y + 1, end= ' ')
         for x in range(len(feld[y])):
-            print('|', end= farbe(feld[y][x]))
-            if len(str(feld[y][x])) == 3:
-                e = ''
-            elif len(str(feld[y][x])) == 2:
-                e = ' '
-            elif len(str(feld[y][x])) == 1:
-                e = ' '
-                print(' ', end= '')
-            print(feld[y][x], end= e + '\033[0m')
+            print('|' + farbe(feld[y][x]) + zahl(feld[y][x]), end= '\033[0m')
         print('|')
 
 ausgeben(feld)
