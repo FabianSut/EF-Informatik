@@ -1,3 +1,4 @@
+import math
 
 feld = [
     [4, 2, 2, 2, 2],
@@ -6,6 +7,14 @@ feld = [
     [8, 8, 2, 8, 2], 
     [4, 16, 16, 8, 4]
 ]
+
+farben = ['1 gibt es nicht', '\033[42m', '\033[105m', '\033[41m', '\033[45m', '\033[46m']
+
+def farbe(n):
+    exponent = int(math.log(n) / math.log(2))
+    farbe = farben[exponent]
+    r = farbe + str(n) + '\033[0m'
+    return r
 
 def ausgeben(feld):
     print('     1   2   3   4   5')
@@ -21,9 +30,7 @@ def ausgeben(feld):
             elif len(str(feld[y][x])) == 1:
                 e = ' '
                 print(' ', end= '')
-            print(feld[y][x], end= e)
+            print(farbe(feld[y][x]), end= e)
         print('|')
-
-
 
 ausgeben(feld)
