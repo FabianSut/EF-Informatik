@@ -24,10 +24,11 @@ def zahl(n):
 def ausgeben(feld):
     print('     1   2   3   4   5')
     for y in range(len(feld)):
-        print('    -------------------')
+        print('   -------------------')
         print(y + 1, end= ' ')
         for x in range(len(feld[y])):
             print('|' + farbe(feld[y][x]) + zahl(feld[y][x]), end= '\033[0m')
         print('|')
+    print('   -------------------')
 
 ausgeben(feld)
