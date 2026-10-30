@@ -5,7 +5,7 @@ feld = [
     [4, 8, 8, 2, 4],
     [2, 2, 8, 8, 8],
     [8, 8, 2, 8, 2], 
-    [4, 16, 16, 8, 4]
+    [4, 16, 16, 32, 4]
 ]
 
 farben = ['1 gibt es nicht', '\033[30;42m', '\033[30;105m', '\033[30;101m', '\033[30;45m', '\033[30;46m']
@@ -17,7 +17,7 @@ def farbe(n):
 
 def zahl(n):
     if len(str(n)) < 3:
-        return str(n).rjust(2, ' ') + ' '
+        return ' ' + str(n).ljust(2, ' ')
     else:
         return str(n)
 
