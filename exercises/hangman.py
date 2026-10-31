@@ -4,6 +4,9 @@ import random
 wort = zufall.zufallswoerter(1)[0]  # gibt ein Zufallswort zurück
 gesucht = wort.lower()
 
+ja = ['y', 'j', 'ja', 'yes']
+nein = ['n', 'nein', 'no']
+
 gefunden = []
 falsch_geraten = []
 
@@ -13,6 +16,26 @@ out_zeichen = ['Bitte nur Buchstaben eingeben.', 'Soll das Französisch sein?!? 
 
 out_wiederholung = ['Du hast bereits diesen Buchstaben geraten!', 'Sei etwas Kreativer. Diesen Buchstaben hattest du bereits geraten.', 'Diesen Buchstaben kenne ich bereits. Wähle einen anderen.']
 
+HANGMANS_RAW = ''' 18 Zeichen ergeben ein Bild...
+                                         __________        __________        __________        __________        __________        __________        __________        __________        __________     
+                       |                 |                 |/                |/        |       |/        |       |/        |       |/        |       |/        |       |/        |       |/        |    
+                       |                 |                 |                 |                 |         O       |         O       |         O       |         O       |         O       |         O    
+                       |                 |                 |                 |                 |                 |         |       |        -|       |        -|       |        -|-      |        -|-   
+                       |                 |                 |                 |                 |                 |                 |                 |          \      |          \      |        / \   
+                       |                 |                 |                 |                 |                 |                 |                 |                 |                 |  GAME OVER   
+    _________         _|_______         _|_______         _|_______         _|_______         _|_______         _|_______         _|_______         _|_______         _|_______         _|_______     
+___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ ___/         \___ 
+'''.split('\n')[1:-1] # ohne erste und letzte Zeile
+
+# enthält 11 ASCII-Bilder, für jeden Spiel-Zustand einen
+HANGMANS = ['\n'.join([line[i : i + 18] for line in HANGMANS_RAW]) for i in range(0, 11 * 18, 18)]
+
+def get_hangman(nr):
+    '''
+    nr: int values from 0 to 10
+    '''
+    return HANGMANS[nr]
+
 # Generiert die Ausgabe im Terminal. Einigermassen grafisch dargestellt.
 def show():
     print('Falsche Buchstaben:', falsch_geraten)
@@ -21,7 +44,8 @@ def show():
             print(buchstabe, end=' ')
         else:
             print('_', end=' ')
-    print('')
+    print()
+    print(get_hangman(len(falsch_geraten)))
 
 # Der Benutzer gibt immer nur valide Inputs. Deshalb gibt diese Funktion immer True zurück.
 def is_valid(inp):
@@ -59,12 +83,29 @@ def gewonnen():
     return True
 
 def game_over():
-    if gewonnen() or len(falsch_geraten) > 100:
+    if gewonnen() or len(falsch_geraten) >= 10:
         return True
     else:
         return False
 
+def wiederholen():
+    global gesucht
+    antwort = input('Möchtest du eine Runde "Hangman" spielen?').lower()
+    if antwort.isalpha():
+        if antwort in ja:
+            print('Super, ich überlege mir ein neues Wort!')
+            wort = zufall.zufallswoerter(1)[0]  # gibt ein Zufallswort zurück
+            gesucht = wort.lower()
+            return True
+        elif antwort in nein:
+            print('Schade... :-(')
+            return False
+        else:
+            print('Das habe ich leider nicht verstanden. ')
+            return False
+
 def play():
+    global gefunden, falsch_geraten
     while not game_over():
         show()
         auswerten(eingabe())
@@ -72,8 +113,11 @@ def play():
     show()
     if gewonnen():
         print('GEWONNEN')
+        gefunden = []
+        falsch_geraten = []
     else:
         print('!!!!!!!GAME OVER!!!!!!!')
 
-print(wort)
-play()
+while wiederholen():
+    print(wort)
+    play()
