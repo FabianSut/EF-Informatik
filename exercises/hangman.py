@@ -1,6 +1,8 @@
 import zufallsworte as zufall
+import random
 
 wort = zufall.zufallswoerter(1)[0]  # gibt ein Zufallswort zurück
+gesucht = wort.lower()
 
 gefunden = []
 falsch_geraten = []
@@ -8,6 +10,8 @@ falsch_geraten = []
 out_zuviel = ['Du kannst nur einen Buchstaben eingeben!', 'Übertreibe nicht! Nur einen Buchstabe.', 'Bitte schreibe keinen Roman, nur ein Zeichen pro Eingabe.']
 
 out_zeichen = ['Bitte nur Buchstaben eingeben.', 'Soll das Französisch sein?!? Ich verstehe nur Buchstaben.', 'Ich bin faul, also schreib mir gefälligst nur Buchstaben.']
+
+out_wiederholung = ['Du hast bereits diesen Buchstaben geraten!', 'Sei etwas Kreativer. Diesen Buchstaben hattest du bereits geraten.', 'Diesen Buchstaben kenne ich bereits. Wähle einen anderen.']
 
 # Generiert die Ausgabe im Terminal. Einigermassen grafisch dargestellt.
 def show():
@@ -26,6 +30,10 @@ def is_valid(inp):
         return False
     elif not inp.isalpha():
         print(out_zeichen[random.randint(0, len(out_zeichen)-1)])
+        return False
+    elif inp in falsch_geraten or inp in gefunden:
+        print(out_wiederholung[random.randint(0, len(out_wiederholung)-1)])
+        return False
     else:
         return True
 
@@ -51,7 +59,7 @@ def gewonnen():
     return True
 
 def game_over():
-    if gewonnen() or len(falsch_geraten) > 10:
+    if gewonnen() or len(falsch_geraten) > 100:
         return True
     else:
         return False
@@ -59,15 +67,13 @@ def game_over():
 def play():
     while not game_over():
         show()
-        e = eingabe()
-        while not is_valid(e):
-            e = eingabe()
-        auswerten(e)
+        auswerten(eingabe())
 
     show()
     if gewonnen():
         print('GEWONNEN')
     else:
         print('!!!!!!!GAME OVER!!!!!!!')
-    
+
+print(wort)
 play()
