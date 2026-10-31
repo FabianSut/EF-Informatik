@@ -1,7 +1,6 @@
-import random
+import zufallsworte as zufall
 
-# Variablen
-gesucht = 'test'
+wort = zufall.zufallswoerter(1)[0]  # gibt ein Zufallswort zurück
 
 gefunden = []
 falsch_geraten = []
