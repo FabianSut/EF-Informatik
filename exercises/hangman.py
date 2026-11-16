@@ -116,6 +116,7 @@ def play():
         gefunden = []
         falsch_geraten = []
     else:
+        print(gesucht)
         print('!!!!!!!GAME OVER!!!!!!!')
 
 while wiederholen():
