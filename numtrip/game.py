@@ -17,7 +17,7 @@ def zufaelliges_feld():
             feld[y][x] = zufaellige_zahl()
 
 def zufaellige_zahl():
-    p = random.randint(1, 7)
+    p = random.randint(1, 4)
     return 2**p
 
 def farbe(n):
