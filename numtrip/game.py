@@ -14,11 +14,7 @@ farben = ['1 gibt es nicht', '\033[30;42m', '\033[30;105m', '\033[30;101m', '\03
 def zufaelliges_feld():
     for y in range(len(feld)):
         for x in range(len(feld[y])):
-            feld[y][x] = zufaellige_zahl()
-
-def zufaellige_zahl():
-    p = random.randint(1, 4)
-    return 2**p
+            feld[y][x] = 2**random.randint(1, 4)
 
 def farbe(n):
     exponent = int(math.log(n) / math.log(2))
