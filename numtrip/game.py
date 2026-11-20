@@ -63,4 +63,3 @@ zufaelliges_feld()
 ausgeben(feld)
 while gameloop:
     spiel()
-    
