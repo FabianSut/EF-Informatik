@@ -1,6 +1,8 @@
 import math
 import random
 
+gameloop = True
+
 feld = [
     [4, 2, 2, 2, 2],
     [4, 8, 8, 2, 4],
@@ -17,6 +19,8 @@ def zufaelliges_feld():
             feld[y][x] = 2**random.randint(1, 4)
 
 def farbe(n):
+    if n == '':
+        return '\033[0m'
     exponent = int(math.log(n) / math.log(2))
     farbe = farben[exponent]
     return farbe
@@ -28,7 +32,7 @@ def zahl(n):
         return str(n)
 
 def ausgeben(feld):
-    print('     1   2   3   4   5')
+    print('    1   2   3   4   5')
     for y in range(len(feld)):
         print('   -------------------')
         print(y + 1, end= ' ')
@@ -37,5 +41,26 @@ def ausgeben(feld):
         print('|')
     print('   -------------------')
 
+def auswerten():
+    feld[y_koordinate][x_koordinate] = ''
+
+def user_input_auswertung(n):
+    global gameloop
+    return int(n) - 1
+
+def user_input():
+    global x_koordinate, y_koordinate
+    x_koordinate = user_input_auswertung(input('Gib die x (Links/Rechts) Koordinate ein (1-5): '))
+    y_koordinate = user_input_auswertung(input('Gib die y (Hoch/Runter) Koordinate ein (1-5): '))
+
+def spiel():
+    user_input()
+    auswerten()
+    ausgeben(feld)
+
+
 zufaelliges_feld()
 ausgeben(feld)
+while gameloop:
+    spiel()
+    
