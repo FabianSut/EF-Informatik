@@ -32,7 +32,7 @@ def zahl(n):
         return str(n)
 
 def ausgeben(feld):
-    print('    1   2   3   4   5')
+    print('    A   B   C   D   E')
     for y in range(len(feld)):
         print('   -------------------')
         print(y + 1, end= ' ')
@@ -54,12 +54,11 @@ def user_input():
     y_koordinate = user_input_auswertung(input('Gib die y (Hoch/Runter) Koordinate ein (1-5): '))
 
 def spiel():
+    ausgeben(feld)
     user_input()
     auswerten()
-    ausgeben(feld)
 
 
 zufaelliges_feld()
-ausgeben(feld)
 while gameloop:
     spiel()
