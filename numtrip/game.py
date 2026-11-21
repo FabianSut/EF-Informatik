@@ -3,6 +3,10 @@ import random
 
 gameloop = True
 
+einzeln = []
+
+abcde = ['a', 'b', 'c', 'd', 'e']
+
 feld = [
     [4, 2, 2, 2, 2],
     [4, 8, 8, 2, 4],
@@ -44,14 +48,37 @@ def ausgeben(feld):
 def auswerten():
     feld[y_koordinate][x_koordinate] = ''
 
-def user_input_auswertung(n):
-    global gameloop
-    return int(n) - 1
+def is_valid(inp):
+    global einzeln
+    einzeln = []
+    if len(inp) != 2:
+        print('Du kannst nur ein Kästchen auswählen.')
+        return False
+    for i in inp:
+        einzeln.append(i)
+    einzeln.sort()
+    if not einzeln[0].isnumeric():
+        print('Bitte gib die Zeile als Zahl ein.')
+        return False
+    if not einzeln[1].isalpha():
+        print('Bitte gib die Spalte als Buchstabe ein.')
+        return False
+    if not einzeln[1] in abcde:
+        print('Du kannst nur die Buchstaben a, b, c, d oder e eingeben.')
+        return False
+    if not 0 < int(einzeln[0]) < 6:
+        print('Du kannst nur Zahlen zwischen 1 und 5 eingeben.')
+        return False
+    print(f'Du wählst das Feld: {einzeln[1]}{einzeln[0]}')
+    return True
 
 def user_input():
     global x_koordinate, y_koordinate
-    x_koordinate = user_input_auswertung(input('Gib die x (Links/Rechts) Koordinate ein (1-5): '))
-    y_koordinate = user_input_auswertung(input('Gib die y (Hoch/Runter) Koordinate ein (1-5): '))
+    eingabe = input('Welches Feld möchtest du auswählen? >> ').lower()
+    while not is_valid(eingabe):
+        eingabe = input('Welches Feld möchtest du auswählen? >> ').lower()
+    x_koordinate = abcde.index(einzeln[1])
+    y_koordinate = int(einzeln[0]) - 1
 
 def spiel():
     ausgeben(feld)
