@@ -69,7 +69,7 @@ def is_valid(inp):
     if not 0 < int(einzeln[0]) < 6:
         print('Du kannst nur Zahlen zwischen 1 und 5 eingeben.')
         return False
-    print(f'Du wählst das Feld: {einzeln[1]}{einzeln[0]}')
+    print(f'Du wählst das Feld: {einzeln[1].upper()}{einzeln[0]}')
     return True
 
 def user_input():
